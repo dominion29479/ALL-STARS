@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-panel {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admin-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .admin-heading h1 {
+            margin: 0;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card-small {
+            padding: 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+        }
+
+        .card-small h3 {
+            margin: 0 0 12px;
+            font-size: 1rem;
+            color: #d7f9ff;
+        }
+
+        .card-small p {
+            margin: 0;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+        }
+
+        th {
+            text-align: left;
+            color: #a9d8ff;
+            font-weight: 700;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, .08);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: .85rem;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background: rgba(255, 255, 255, .15);
+            color: #fff;
+        }
+
+        .status-fulfilled {
+            background: #16a34a;
+            color: #fff;
+        }
+
+        .status-cancelled {
+            background: #be123c;
+            color: #fff;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .order-actions button {
+            width: auto;
+            padding: 8px 14px;
+            border-radius: 14px;
+            font-size: .9rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .order-actions button.update {
+            background: #22c55e;
+            color: #000;
+        }
+
+        .order-actions button.delete {
+            background: #ef4444;
+            color: white;
+        }
+
+        .admin-note {
+            margin-top: 18px;
+            color: rgba(255, 255, 255, .8);
+        }
+
+        .product-management {
+            margin-top: 40px;
+            display: grid;
+            gap: 24px;
+        }
+
+        .product-management h2 {
+            margin-bottom: 12px;
+        }
+
+        .product-editor {
+            display: grid;
+            gap: 18px;
+            padding: 24px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+        }
+
+        .product-editor label {
+            color: white;
+            font-weight: 600;
+        }
+
+        .product-editor input,
+        .product-editor textarea {
+            padding: 12px 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, .25);
+            background: rgba(255, 255, 255, .08);
+            color: white;
+            outline: none;
+            width: 100%;
+        }
+
+        .product-editor textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .product-editor button {
+            width: fit-content;
+            padding: 12px 24px;
+            border-radius: 18px;
+            border: none;
+            background: #22d3ee;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .product-editor button:hover {
+            background: #38bdf8;
+        }
+
+        .management-grid {
+            display: grid;
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .management-grid .product-editor {
+            margin: 0;
+        }
+
+        .summary-note {
+            color: rgba(255, 255, 255, .8);
+            margin-bottom: 12px;
+        }
+
+        .admin-filter-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .admin-filter-row input,
+        .admin-filter-row select {
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            background: rgba(255, 255, 255, .08);
+            color: white;
+            min-width: 180px;
+        }
+
+        .stock-badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: .85rem;
+            font-weight: 700;
+        }
+
+        .stock-in {
+            background: rgba(34, 197, 94, .2);
+            color: #bbf7d0;
+        }
+
+        .stock-out {
+            background: rgba(248, 113, 113, .2);
+            color: #fecaca;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .insight-card {
+            padding: 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+        }
+
+        .insight-card h3 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: #d7f9ff;
+        }
+
+        .insight-card p {
+            margin: 0;
+            font-size: 1.35rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .insight-card small {
+            display: block;
+            margin-top: 6px;
+            color: rgba(255, 255, 255, .75);
+        }
+
+        .low-stock-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .low-stock-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .08);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cart.html">Cart</a>
+            <a href="orders.html">Orders</a>
+            <a href="admin-login.html">Admin</a>
+        </nav>
+    </header>
+    <main class="admin-panel">
+        <div class="admin-heading">
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p class="admin-note">Manage orders and products from here.</p>
+            </div>
+            <div class="admin-actions">
+                <button id="refresh-orders">Refresh orders</button>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card-small">
+                <h3>Total Orders</h3>
+                <p id="total-orders">0</p>
+            </div>
+            <div class="card-small">
+                <h3>Pending</h3>
+                <p id="pending-count">0</p>
+            </div>
+            <div class="card-small">
+                <h3>Fulfilled</h3>
+                <p id="fulfilled-count">0</p>
+            </div>
+            <div class="card-small">
+                <h3>Cancelled</h3>
+                <p id="cancelled-count">0</p>
+            </div>
+        </div>
+        <div class="insight-grid">
+            <div class="insight-card">
+                <h3>Revenue</h3>
+                <p id="revenue-total">₦0</p>
+                <small>From fulfilled orders</small>
+            </div>
+            <div class="insight-card">
+                <h3>Low stock</h3>
+                <p id="low-stock-count">0</p>
+                <small>Products that need restocking</small>
+            </div>
+            <div class="insight-card">
+                <h3>Best seller</h3>
+                <p id="best-seller-name">—</p>
+                <small>Most ordered product</small>
+            </div>
+        </div>
+        <div class="table-container">
+            <h2 style="color:white; margin-bottom:14px;">Low Stock Alert</h2>
+            <div id="low-stock-list" class="low-stock-list"></div>
+        </div>
+        <section class="table-container">
+            <h2 style="color:white; margin-bottom:14px;">Order List</h2>
+            <div class="admin-filter-row">
+                <input type="search" id="order-search" placeholder="Search customer or product">
+                <select id="order-status-filter">
+                    <option value="all">All statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="fulfilled">Fulfilled</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Location</th>
+                        <th>Products</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Placed</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-orders"></tbody>
+            </table>
+        </section>
+        <section class="management-grid">
+            <div class="product-editor">
+                <h2 style="color:white; margin-bottom:8px;">Add Location</h2>
+                <p class="summary-note">Create delivery or pickup locations that can be used later by the store.</p>
+                <form id="add-location-form">
+                    <label for="location-name">Location Name</label>
+                    <input type="text" id="location-name" name="name" required>
+
+                    <label for="location-address">Address</label>
+                    <input type="text" id="location-address" name="address" placeholder="Lagos, Nigeria">
+
+                    <label for="location-phone">Phone</label>
+                    <input type="text" id="location-phone" name="phone" placeholder="08012345678">
+
+                    <label for="location-notes">Notes</label>
+                    <textarea id="location-notes" name="notes"
+                        placeholder="Pickup instructions, hours, etc."></textarea>
+
+                    <button type="submit">Save Location</button>
+                </form>
+            </div>
+            <div class="table-container">
+                <h2 style="color:white; margin-bottom:14px;">Saved Locations</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-locations"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="product-management-section" class="product-management">
+            <div>
+                <h2 style="color:white;">Product Management</h2>
+                <p class="admin-note">Add, edit, or delete products that appear on the storefront.</p>
+            </div>
+            <div class="product-editor">
+                <form id="add-product-form">
+                    <label for="name">Product Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" required>
+
+                    <label for="image">Image URL</label>
+                    <input type="text" id="image" name="image" placeholder="images/product.jpg">
+                    <label for="image-select" style="margin-top:8px;">Or choose existing image</label>
+                    <select id="image-select"
+                        style="padding:8px;border-radius:8px;background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.12)">
+                        <option value="">— select image —</option>
+                    </select>
+                    <div style="margin-top:8px;display:flex;gap:12px;align-items:center;">
+                        <div style="display:flex;flex-direction:column;gap:8px;">
+                            <input type="file" id="image-file" accept="image/*">
+                            <button type="button" id="upload-image-btn"
+                                style="padding:8px;border-radius:8px;border:none;background:#22d3ee;color:#000;cursor:pointer;">Upload
+                                Image</button>
+                        </div>
+                        <div>
+                            <img id="image-preview" src="" alt="preview"
+                                style="max-width:160px;border-radius:8px;display:none;border:1px solid rgba(255,255,255,.12)">
+                        </div>
+                    </div>
+
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description"></textarea>
+
+                    <button type="submit">Add Product</button>
+                </form>
+            </div>
+            <div class="table-container">
+                <h2 style="color:white; margin-bottom:14px;">Product Catalog</h2>
+                <div class="admin-filter-row">
+                    <input type="search" id="product-search" placeholder="Search products">
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-products"></tbody>
+                </table>
+            </div>
+            <div class="table-container">
+                <h2 style="color:white; margin-bottom:14px;">Products Ordered</h2>
+                <p class="summary-note">See which items have been sold most and how much revenue they generated.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Units Sold</th>
+                            <th>Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-order-summary"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script>
+        // protect admin page: require sessionStorage flag
+        if (sessionStorage.getItem('admin_logged') !== '1') {
+            window.location.href = '/admin-login.html';
+        }
+    </script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

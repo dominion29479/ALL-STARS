@@ -1,0 +1,129 @@
+.admin-panel {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.admin-heading h1 {
+    margin: 0;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.card-small {
+    padding: 20px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+}
+
+.card-small h3 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    color: #d7f9ff;
+}
+
+.card-small p {
+    margin: 0;
+    font-size: 2rem;
+    color: white;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    padding: 14px 16px;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+th {
+    text-align: left;
+    color: #a9d8ff;
+    font-weight: 700;
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, .08);
+}
+
+.status-pill {
+    display: inline-flex;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+}
+
+.status-fulfilled {
+    background: #16a34a;
+    color: #fff;
+}
+
+.status-cancelled {
+    background: #be123c;
+    color: #fff;
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.order-actions button {
+    width: auto;
+    padding: 8px 14px;
+    border-radius: 14px;
+    font-size: .9rem;
+}
+
+.order-actions button.update {
+    background: #22c55e;
+    color: #000;
+}
+
+.order-actions button.delete {
+    background: #ef4444;
+}
+
+.admin-note {
+    margin-top: 18px;
+    color: rgba(255, 255, 255, .8);
+}

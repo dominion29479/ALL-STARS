@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-page {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .auth-card {
+            width: min(100%, 460px);
+            padding: 28px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .22);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+        }
+
+        .auth-card h2 {
+            margin: 0 0 8px;
+            color: white;
+        }
+
+        .auth-card p {
+            margin: 0 0 18px;
+            color: #e2e8f0;
+        }
+
+        .auth-card form {
+            display: grid;
+            gap: 12px;
+        }
+
+        .auth-card input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            background: rgba(255, 255, 255, .08);
+            color: white;
+        }
+
+        .auth-card button {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .toggle-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .toggle-row button {
+            flex: 1;
+            width: 100%;
+            margin-top: 0;
+            padding: 10px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            background: rgba(255, 255, 255, .1);
+            color: white;
+        }
+
+        .toggle-row button.active {
+            background: linear-gradient(90deg, #38bdf8, #2563eb);
+        }
+
+        .auth-link {
+            margin-top: 14px;
+            text-align: center;
+            color: #dbeafe;
+        }
+
+        .auth-link a {
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .auth-message {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .08);
+            color: white;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Customer Login</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cart.html">Cart</a>
+            <a href="admin-login.html">Admin Login</a>
+        </nav>
+    </header>
+
+    <main class="auth-page">
+        <div class="auth-card">
+            <h2>Welcome</h2>
+            <p>Create an account or sign in to track orders and continue shopping.</p>
+            <div class="toggle-row">
+                <button type="button" class="active" id="show-login">Sign In</button>
+                <button type="button" id="show-signup">Sign Up</button>
+            </div>
+            <form id="customer-login-form" class="auth-form">
+                <input id="customer-email" name="email" type="email" placeholder="Email" required>
+                <input id="customer-password" name="password" type="password" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+            </form>
+            <form id="customer-signup-form" class="auth-form" style="display:none;">
+                <input id="customer-name" name="name" type="text" placeholder="Full Name" required>
+                <input id="customer-signup-email" name="email" type="email" placeholder="Email" required>
+                <input id="customer-signup-password" name="password" type="password" placeholder="Password" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <div id="customer-auth-message" class="auth-message"></div>
+            <div class="auth-link">
+                <a href="admin-login.html">Login as Admin</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE_URL = window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:3000';
+        const loginForm = document.getElementById('customer-login-form');
+        const signupForm = document.getElementById('customer-signup-form');
+        const message = document.getElementById('customer-auth-message');
+        const showLoginBtn = document.getElementById('show-login');
+        const showSignupBtn = document.getElementById('show-signup');
+
+        async function safeParseJSON(response) {
+            const text = await response.text();
+            if (!text) return null;
+            try {
+                return JSON.parse(text);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function setMode(mode) {
+            const isLogin = mode === 'login';
+            loginForm.style.display = isLogin ? 'grid' : 'none';
+            signupForm.style.display = isLogin ? 'none' : 'grid';
+            showLoginBtn.classList.toggle('active', isLogin);
+            showSignupBtn.classList.toggle('active', !isLogin);
+        }
+
+        showLoginBtn.addEventListener('click', () => setMode('login'));
+        showSignupBtn.addEventListener('click', () => setMode('signup'));
+
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const payload = {
+                email: loginForm.email.value.trim(),
+                password: loginForm.password.value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await safeParseJSON(response);
+                if (!response.ok) throw new Error(result?.error || result?.message || 'Login failed');
+                if (!result || !result.user) throw new Error('Login response was invalid.');
+
+                localStorage.setItem('authUser', JSON.stringify(result.user));
+                localStorage.setItem('authToken', result.token || '');
+                message.style.display = 'block';
+                message.textContent = 'Signed in successfully. Redirecting...';
+                setTimeout(() => window.location.href = '/orders.html', 800);
+            } catch (error) {
+                const displayMessage = String(error.message || '').toLowerCase().includes('failed to fetch')
+                    ? 'Unable to contact the server. Start the backend and refresh this page.'
+                    : error.message;
+                message.style.display = 'block';
+                message.textContent = displayMessage;
+            }
+        });
+
+        signupForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const payload = {
+                name: signupForm.name.value.trim(),
+                email: signupForm.email.value.trim(),
+                password: signupForm.password.value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await safeParseJSON(response);
+                if (!response.ok) throw new Error(result?.error || result?.message || 'Sign up failed');
+                if (!result || !result.user) throw new Error('Sign up response was invalid.');
+
+                localStorage.setItem('authUser', JSON.stringify(result.user));
+                localStorage.setItem('authToken', result.token || '');
+                message.style.display = 'block';
+                message.textContent = 'Account created. Redirecting...';
+                setTimeout(() => window.location.href = '/orders.html', 800);
+            } catch (error) {
+                const displayMessage = String(error.message || '').toLowerCase().includes('failed to fetch')
+                    ? 'Unable to contact the server. Start the backend and refresh this page.'
+                    : error.message;
+                message.style.display = 'block';
+                message.textContent = displayMessage;
+            }
+        });
+    </script>
+</body>
+
+</html>

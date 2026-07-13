@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOUR ORDERS</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .order {
+            background: #222;
+            color: #fff;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 6px;
+        }
+
+        .order h3 {
+            margin: 0 0 8px 0
+        }
+
+        .items {
+            margin-top: 8px
+        }
+
+        .item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin: 6px 0
+        }
+
+        .item img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 4px
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>YOUR ORDERS</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cart.html">Cart</a>
+            <a href="orders.html">Orders</a>
+            <a href="admin.html">Admin</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Recent Orders</h2>
+            <div id="orders-container">Loading orders...</div>
+        </section>
+    </main>
+
+    <script src="orders.js"></script>
+</body>
+
+</html>

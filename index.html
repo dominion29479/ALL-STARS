@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Of Gadget Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>House Of Gadget Store</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#products-section">Products</a>
+            <a href="cart.html" aria-label="view cart">Cart (<span id="count">0</span>)</a>
+            <a href="admin.html">Admin</a>
+        </nav>
+        <form id="search-form" role="search" aria-label="Search products">
+            <div class="search-wrapper">
+                <input id="search" type="search" name="q" placeholder="Search products..." aria-label="Search products">
+                <button type="button" id="search-clear" aria-label="Clear search">✕</button>
+            </div>
+            <div id="search-status" class="visually-hidden" aria-live="polite"></div>
+        </form>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">Premium gadgets, made simple</p>
+            <h2>House Of Gadget Store</h2>
+            <p>Discover high-quality tech essentials with fast checkout and a smooth shopping experience.</p>
+            <div class="hero-actions">
+                <a href="#products-section" class="shop-btn">Shop Now</a>
+                <a href="cart.html" class="secondary-btn">View Cart</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-shell">
+        <section class="products-section" id="products-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Featured items</p>
+                    <h2>Our Products</h2>
+                </div>
+            </div>
+            <div id="products" class="products-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 DOMINIONTECH. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js?v=20260712"></script>
+</body>
+
+</html>
