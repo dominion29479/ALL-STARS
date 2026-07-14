@@ -805,3 +805,8 @@ footer {
         flex-direction: column;
     }
 }
+
+.logo {
+    width: 100px;
+    height: auto;
+}
