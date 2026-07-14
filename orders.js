@@ -8,7 +8,7 @@ function formatDate(value) {
     });
 }
 
-const API_BASE_URL = window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:3000';
+const API_BASE_URL = window.location.protocol.startsWith('http') ? window.location.origin : 'https://tech-choice-store-trd.onrender.com';
 
 function getStatusMeta(status) {
     const normalized = String(status || 'pending').toLowerCase();

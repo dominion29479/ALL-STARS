@@ -15,7 +15,7 @@ function saveCart() {
 }
 
 let cart = loadCart();
-const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'http://localhost:3000';
+const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'https://tech-choice-store-trd.onrender.com';
 
 function updateCartCount() {
     const countEl = document.getElementById('count');

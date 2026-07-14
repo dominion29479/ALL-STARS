@@ -26,12 +26,5 @@
     "price": 60000,
     "image": "images/headphones.jpeg",
     "description": "Comfortable noise-isolating headphones for everyday use."
-  },
-  {
-    "id": 5,
-    "name": "Dominion Chukwudubem",
-    "price": 568888,
-    "image": "images/placeholder.png",
-    "description": "Very good"
   }
 ]

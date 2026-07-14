@@ -19,7 +19,7 @@ const bestSellerNameEl = document.getElementById('best-seller-name');
 const lowStockListEl = document.getElementById('low-stock-list');
 
 const statusOptions = ['pending', 'fulfilled', 'cancelled'];
-const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'http://localhost:3000';
+const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'https://tech-choice-store-trd.onrender.com';
 
 function createStatusPill(status) {
     const span = document.createElement('span');
