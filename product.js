@@ -15,7 +15,7 @@ function saveCart() {
 }
 
 let cart = loadCart();
-const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'https://allstars.onrender.com';
+const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'https://all-stars-1.onrender.com';
 
 function updateCartCount() {
     const countEl = document.getElementById('count');

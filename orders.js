@@ -8,7 +8,7 @@ function formatDate(value) {
     });
 }
 
-const API_BASE_URL = window.location.protocol.startsWith('http') ? window.location.origin : 'https://allstars.onrender.com';
+const API_BASE_URL = window.location.protocol.startsWith('http') ? window.location.origin : 'https://all-stars-1.onrender.com';
 
 function getStatusMeta(status) {
     const normalized = String(status || 'pending').toLowerCase();
