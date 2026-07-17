@@ -16,7 +16,7 @@ function saveCart() {
 
 let cart = loadCart();
 let currentUser = JSON.parse(localStorage.getItem("authUser")) || null;
-const API_BASE_URL = window.location.protocol.startsWith('http') ? window.location.origin : 'https://tech-choice-store-trd.onrender.com';
+const API_BASE_URL = window.location.protocol.startsWith('http') ? window.location.origin : 'https://all-stars-o2yu.onrender.com';
 let pendingPaystackRef = null;
 
 const cartItems = document.getElementById("cart-items");

@@ -24,7 +24,7 @@ function saveCart() {
 }
 
 let cart = loadCart();
-const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'https://tech-choice-store-trd.onrender.com';
+const API_BASE_URL = window.location.origin.includes('3000') ? window.location.origin : 'https://all-stars-o2yu.onrender.com';
 
 function updateCartCount() {
     const countEl = document.getElementById("count");
