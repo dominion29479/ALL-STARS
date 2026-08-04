@@ -37,10 +37,10 @@ const DB_PATH = path.join(__dirname, 'database.sqlite');
 const LEGACY_DATA_FILE = path.join(__dirname, 'orders.json');
 
 const defaultProducts = [
-  { id: 1, name: 'HDMI VIDEO SWITCH 4K (FJGEAR)', price: 450000, image: 'images/hdmi.jpg', description: 'High-performance laptop for work, study, and gaming.' },
-  { id: 2, name: 'TYPE-C TO HDTV', price: 250000, image: 'images/T.jpeg', description: 'Connect your usb-c computer to HDTV equipped display.' },
-  { id: 3, name: 'WIRELESS DUAL BAND USB ADAPTER (LB-LINK)', price: 35000, image: 'images/S.jpeg', description: 'Wireless adaptar provides the greater throughput performance, more stable network connection and higher compactibility for wireless adapters, Greatly enhance the reception and transmission signal strenght.' },
-  { id: 4, name: 'Sport Headphones (X2pro)', price: 60000, image: 'images/headphones.jpeg', description: 'Good sound quality exprience, detachable design, in ear headphones, intelligent wire control.' }
+  { id: 1, name: 'HDMI VIDEO CAPTURE', price: 450000, image: 'images/ghj.png', description: 'A compact video capture card used to record or stream video/audio directly from consoles, cameras, or computers to a PC.' },
+  { id: 2, name: 'ETHRANET ADAPTER', price: 250000, image: 'images/1.png', description: 'Instantly add a reliable, wired RJ45 network port to your computer with the USB 3.0 to Gigabit Ethernet Adapter.' },
+  { id: 3, name: 'USB ACTIVE REPEATER', price: 35000, image: 'images/2.png', description: 'The USB Active Repeater Cable is an active extension cable designed to extend the reach of your USB connection over long distances without signal degradation' },
+  { id: 4, name: 'PORTABLE POWER SUPPLY', price: 60000, image: 'images/poe.png', description: 'Good sound quality exprience, detachable design, in ear headphones, intelligent wire control.' }
 ];
 
 const PRODUCTS_FILE = path.join(__dirname, 'products.json');

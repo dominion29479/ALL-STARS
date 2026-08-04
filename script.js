@@ -1,8 +1,8 @@
 const defaultProducts = [
-    { id: 1, name: "Laptop", price: 450000, image: "images/laptop.jpg", description: "High-performance laptop for work, study, and gaming." },
-    { id: 2, name: "Redmi A5 smartphone", price: 250000, image: "images/redmi.jpeg", description: "Reliable smartphone with long battery life and clear display." },
-    { id: 3, name: "Headphones", price: 35000, image: "images/smartwatch.jpeg", description: "Comfortable noise-isolating headphones for everyday use." },
-    { id: 4, name: "smart watch", price: 60000, image: "images/headphones.jpeg", description: "Fitness smartwatch with step tracking and notifications." }
+    { id: 1, name: "HDMI VIDEO CAPTURE", price: 450000, image: "images/ghj.png", description: "A compact video capture card used to record or stream video/audio directly from consoles, cameras, or computers to a PC." },
+    { id: 2, name: "ETHRANET ADAPTER", price: 250000, image: "images/1.png", description: "Instantly add a reliable, wired RJ45 network port to your computer with the USB 3.0 to Gigabit Ethernet Adapter." },
+    { id: 3, name: "USB ACTIVE REPEATER", price: 35000, image: "images/2.png", description: "The USB Active Repeater Cable is an active extension cable designed to extend the reach of your USB connection over long distances without signal degradation" },
+    { id: 4, name: "PORTABLE POWER SUPPLY", price: 60000, image: "images/poe.png", description: "The POE-431P Mini DC UPS is a compact, multi-functional uninterruptible power supply designed to keep your essential network hardware running seamlessly during power outages" }
 ];
 
 let products = defaultProducts.slice();
