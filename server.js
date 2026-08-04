@@ -37,10 +37,10 @@ const DB_PATH = path.join(__dirname, 'database.sqlite');
 const LEGACY_DATA_FILE = path.join(__dirname, 'orders.json');
 
 const defaultProducts = [
-  { id: 1, name: 'Laptop', price: 450000, image: 'images/laptop.jpg', description: 'High-performance laptop for work, study, and gaming.' },
-  { id: 2, name: 'Redmi A5 smartphone', price: 250000, image: 'images/redmi.jpeg', description: 'Reliable smartphone with long battery life and clear display.' },
-  { id: 3, name: 'Smart watch', price: 35000, image: 'images/smartwatch.jpeg', description: 'Fitness smartwatch with heart rate tracking and notifications.' },
-  { id: 4, name: 'Headphones', price: 60000, image: 'images/headphones.jpeg', description: 'Comfortable noise-isolating headphones for everyday use.' }
+  { id: 1, name: 'HDMI VIDEO SWITCH 4K (FJGEAR)', price: 450000, image: 'images/hdmi.jpg', description: 'High-performance laptop for work, study, and gaming.' },
+  { id: 2, name: 'TYPE-C TO HDTV', price: 250000, image: 'images/T.jpeg', description: 'Connect your usb-c computer to HDTV equipped display.' },
+  { id: 3, name: 'WIRELESS DUAL BAND USB ADAPTER (LB-LINK)', price: 35000, image: 'images/S.jpeg', description: 'Wireless adaptar provides the greater throughput performance, more stable network connection and higher compactibility for wireless adapters, Greatly enhance the reception and transmission signal strenght.' },
+  { id: 4, name: 'Sport Headphones (X2pro)', price: 60000, image: 'images/headphones.jpeg', description: 'Good sound quality exprience, detachable design, in ear headphones, intelligent wire control.' }
 ];
 
 const PRODUCTS_FILE = path.join(__dirname, 'products.json');
